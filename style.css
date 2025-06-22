@@ -1,0 +1,106 @@
+/*
+ * Использование :root позволяет нам задать "запасные" (fallback) значения
+ * на случай, если переменные от Telegram не загрузятся. 
+ * Это полезно для тестирования в обычном браузере.
+ */
+:root {
+    --tg-theme-bg-color: #ffffff;
+    --tg-theme-text-color: #000000;
+    --tg-theme-button-color: #007aff;
+    --tg-theme-button-text-color: #ffffff;
+}
+
+body {
+    /* Используем системные шрифты для нативного вида */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    
+    /* Применяем цвета из переменных Telegram */
+    /* Заменяем стандартный фон на анимированный градиент */
+    color: #ffffff; /* Меняем цвет текста на белый для читаемости */
+    
+    /* Убираем стандартные отступы */
+    margin: 0;
+    padding: 20px;
+    
+    /* --- Центрирование контента с помощью Flexbox --- */
+    display: flex;
+    flex-direction: column;  /* Элементы будут идти друг под другом */
+    align-items: center;     /* Центрирование по горизонтали      */
+    justify-content: center; /* Центрирование по вертикали      */
+    height: 100vh;           /* Растягиваем body на всю высоту экрана  */
+    text-align: center;      /* Центрируем текст внутри элементов    */
+    box-sizing: border-box;  /* Учитываем padding в общей высоте/ширине */
+
+    /* --- Запасной фон --- */
+    /* Устанавливаем темно-синий фон на случай, если градиент не сработает. */
+    /* Это гарантирует, что белый текст всегда будет читаемым. */
+    background-color: #001f3f;
+
+    /* --- Новый анимированный фон --- */
+    /* Градиент от голубого к темно-синему и обратно для плавного цикла */
+    background: linear-gradient(-45deg, #00c6ff, #0072ff, #001f3f, #0072ff);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+#user-info {
+    font-size: 16px;
+    min-height: 24px; /* Чтобы блок не "прыгал" при загрузке данных */
+}
+
+/* --- Стили для красивой кнопки --- */
+#close-button {
+    margin-top: 30px;
+    
+    /* --- Стили для "стеклянной" кнопки, которая хорошо смотрится на градиенте --- */
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Поддержка Safari */
+    
+    /*
+     * Делаем углы скругленными
+     */
+    border-radius: 12px;
+    
+    /* Добавляем внутренние отступы для объема */
+    padding: 12px 24px;
+    
+    font-size: 16px;
+    font-weight: 600;
+    
+    /* Меняем курсор при наведении, показывая, что элемент кликабельный */
+    cursor: pointer;
+    
+    /* Добавляем плавный переход для анимаций */
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* Эффект при наведении мыши */
+#close-button:hover {
+    opacity: 0.85;
+}
+
+/* Эффект "нажатия" на кнопку */
+#close-button:active {
+    transform: scale(0.97);
+}
+
+/* --- Ключевые кадры для анимации градиента --- */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
